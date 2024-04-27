@@ -1,0 +1,7 @@
+0 szary = RGB: 128,128,128 hex: 8080880
+1 ciemnozielony = RGB: 38,127,0 hex:267F00
+2 jasnozielony = RGB: 76, 255, 0 hex:4CFF00
+3 żółty = RGB: 255, 216, 0 hex: FFD800
+4 niebieski = RGB: 0, 38, 255 hex: 0026FF
+5 czarny = RGB: 0, 0, 0
+6 biały = RGB: 255,255,255

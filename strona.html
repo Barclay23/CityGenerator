@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="script.js" defer></script>
+    <script src="ImageScanner.js"></script>
+    <script src="CityFinder.js"></script>
+    <script src="CityBorders.js"></script>
+    <script src="TerrainProperties.js"></script>
+    <script src="CityProperties.js"></script>
+    <script src="CityRoads.js"></script>
+    <script src="DisctricBuilder.js"></script>
+    <script src="District.js"></script>
+</head>
+
+<body>
+    <input type="file" id="pngFileInput" accept=".png">
+    <button onClick="test()">
+        Zmiastuj
+    </button>
+    Wybierz rozmiar
+    <select id="sizeOptions" onselect="selectSizeOption()">
+        <option value="option1">Małe</option>
+        <option value="option2">Średnie</option>
+        <option value="option3">Duże</option>
+    </select>
+    Wybierz typ
+    <select id="typeOptions" onselect="selectTypeOption()">
+        <option value="option1">Handlowe</option>
+        <option value="option2">Warowne</option>
+        <option value="option3">Portowe</option>
+    </select>
+    Wybierz maskę
+    <select id="maskOptions" onselect="selectMaskOption()">
+        <option value="option1">1 px</option>
+        <option value="option2">2 px</option>
+        <option value="option3">5 px</option>
+        <option value="option4">10 px</option>
+    </select>
+    <br>
+    <canvas id="result" width="1500" height="1000"></canvas>
+</body>
+
+</html>
