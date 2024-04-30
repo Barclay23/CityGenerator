@@ -123,11 +123,12 @@ async function test() {
     console.log("Ilosc punktow: " + cityProperties.numOfP() + " Ilosc granicznych: " + cityProperties.numOfB() + " Ilosc przy rzece: "+ cityProperties.numOfRB());
     bigPixels = borders.final();
     var radius = borders.radiusS();
-    var disBuilder = new DistricBuilder(cityType,citySize,CityProperties);
+    var disBuilder = new DistricBuilder(cityType,citySize,cityProperties, terrainUnder);
     var numOfDist = disBuilder.numOfDist();
     var cityRoads = new CityRoads(bigPixels, cityProperties, radius, numOfDist, middle, citySize);
     disBuilder.buildDist(bigPixels);
     show();
+    //disBuilder.showNeighbors();
     const endTime = Date.now();
     console.log("Czas trwania:" + (endTime - startTime) / 1000);
 }

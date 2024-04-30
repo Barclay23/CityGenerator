@@ -9,7 +9,8 @@ class District {
         this.points = [];
         this.PMap = new Map();
         this.terrainUnder = -1;
-        this.neighbours = new Map();
+        this.nMAP = new Map();
+        this.neighbours = [];
         this.size = 0;
     }
     async addPoint(x,y){
@@ -21,11 +22,24 @@ class District {
         this.terrainUnder=terrain;
     }
     async addNeighbour(neighbour){
-        if(this.neighbours.get(neighbour)!=1){
-            this.neighbours.set(neighbour,1);
+        if(this.nMAP.get(neighbour)!=1 && neighbour != this.number){
+            this.nMAP.set(neighbour,1);
+            this.neighbours.push(neighbour);
         }
     }
     async setNW(nearWater){
         this.nearWater = nearWater;
+    }
+    getNeighbours(){
+        return this.neighbours;
+    }
+    getType(){
+        return this.type;
+    }
+    ifNearWater(){
+        return this.nearWater;
+    }
+    getTerrain(){
+        return this.terrainUnder;
     }
 }
