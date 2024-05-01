@@ -1,4 +1,30 @@
-const map = [[128, 128, 128], [38, 127, 0], [76, 255, 0], [255, 216, 0], [0, 38, 255], [0, 0, 0], [255, 255, 255],[251,188,255],[255,136,0],[255,12,16],[127,250,255],[206,255,117],[255,0,182],[127,0,0],[0,127,127],[127,106,0],[231,127,70]]
+const map = 
+[[128, 128, 128], 
+[38, 127, 0], 
+[76, 255, 0], 
+[255, 216, 0], 
+[0, 38, 255], 
+[0, 0, 0], 
+[255, 255, 255],
+
+[251,188,255],
+[255,136,0],
+[255,12,16],
+[127,250,255],
+[206,255,117],
+[255,0,182],
+[127,0,0],
+[0,127,127],
+[127,106,0],
+[231,127,70],
+[137,255,172],
+
+[190,127,70],
+[255,136,0],
+[218,0,0],
+[127,0,0],
+[119,86,101],
+[127,106,0],];
 var bigPixels;
 var terrainUnder;
 var maskSize;
@@ -127,8 +153,9 @@ async function test() {
     var numOfDist = disBuilder.numOfDist();
     var cityRoads = new CityRoads(bigPixels, cityProperties, radius, numOfDist, middle, citySize);
     disBuilder.buildDist(bigPixels);
+    disBuilder.colorDistricts();
     show();
-    //disBuilder.showNeighbors();
+    disBuilder.showNeighbors();
     const endTime = Date.now();
     console.log("Czas trwania:" + (endTime - startTime) / 1000);
 }

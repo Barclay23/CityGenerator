@@ -30,6 +30,9 @@ class District {
     async setNW(nearWater){
         this.nearWater = nearWater;
     }
+    setType(type){
+        this.type = type;
+    }
     getNeighbours(){
         return this.neighbours;
     }
@@ -42,4 +45,8 @@ class District {
     getTerrain(){
         return this.terrainUnder;
     }
+    getSize(){
+        return this.size;
+    }
+    
 }
