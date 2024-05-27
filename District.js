@@ -3,7 +3,7 @@ class District {
         this.a=a;
         this.b=b;
         this.type = type;
-        this.cP= cityProperties;
+        this.cP = cityProperties;
         this.number = number;
         this.nearWater = false;
         this.points = [];
@@ -14,9 +14,11 @@ class District {
         this.size = 0;
     }
     async addPoint(x,y){
-        this.points.push({ x: x, y: y });
-        this.PMap.set(x*this.a+y,1);
-        this.size++;
+        if(!this.points.includes({x,y})){
+            this.points.push({ x: x, y: y });
+            this.PMap.set(x*this.a+y,1);
+            this.size++;
+        }
     }
     async setTerrian(terrain){
         this.terrainUnder=terrain;
@@ -48,5 +50,7 @@ class District {
     getSize(){
         return this.size;
     }
-    
+    getPoint(num){
+        return this.points[num];
+    }
 }

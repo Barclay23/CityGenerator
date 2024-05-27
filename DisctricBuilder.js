@@ -129,12 +129,9 @@ class DistricBuilder {
         }
         this.choosingTypes();
     }
-    async showNeighbors() {
+    async showTypes() {
         this.listOfTypes.sort();
         console.log(this.listOfTypes);
-        for (let i = 0; i < this.numOfD; i++) {
-            
-        }
     }
     async whichColor(x,y){
         var dist = this.bigPixels[y][x]-7;
@@ -148,5 +145,8 @@ class DistricBuilder {
                 }
             }
         }
+    }
+    getDist(num){
+        return this.districts[num];
     }
 }

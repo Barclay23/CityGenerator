@@ -95,34 +95,6 @@ function updateSizes(){
             break;
     }
 }
-function colormapToRgb(a) {
-    return map[a]
-}
-async function show() {
-    const canvas = document.getElementById("result");
-    const y = bigPixels.length * maskSize;
-    const x = bigPixels[0].length * maskSize;
-    var imageData = canvas.getContext('2d').getImageData(0, 0, x, y);
-    for (let i = 0; i < bigPixels.length; i++) {
-        //const row = document.createElement('tr');
-        for (let j = 0; j < bigPixels[i].length; j++) {
-            let color = colormapToRgb(bigPixels[i][j]);
-            if (typeof color !== 'undefined') {
-                for (let k = i * maskSize; k < maskSize * (i + 1); k++) {
-                    for (let l = j * maskSize; l < maskSize * (j + 1); l++) {
-                        imageData.data[4 * (l + k * x)] = color[0];
-                        imageData.data[4 * (l + k * x) + 1] = color[1];
-                        imageData.data[4 * (l + k * x) + 2] = color[2];
-                        imageData.data[4 * (l + k * x) + 3] = 255;
-                    }
-                    //console.log(i+" "+k);
-                }
-            }
-        }
-    }
-    canvas.getContext('2d').putImageData(imageData, 0, 0);
-}
-
 async function test() {
     const startTime = Date.now();
     selectedMaskOption = document.getElementById("maskOptions").value;
@@ -145,17 +117,19 @@ async function test() {
     var ter = new TerrainProperties(citySize);
     var terrain = ter.final();
     var cityProperties = new CityProperties(bigPixels[0].length, bigPixels.length);
-    var borders = new Cityborders(bigPixels, middle, citySize, terrain, cityProperties);
+    var borders = new CityBorders(bigPixels, middle, citySize, terrain, cityProperties);
     console.log("Ilosc punktow: " + cityProperties.numOfP() + " Ilosc granicznych: " + cityProperties.numOfB() + " Ilosc przy rzece: "+ cityProperties.numOfRB());
     bigPixels = borders.final();
     var radius = borders.radiusS();
     var disBuilder = new DistricBuilder(cityType,citySize,cityProperties, terrainUnder);
     var numOfDist = disBuilder.numOfDist();
-    var cityRoads = new CityRoads(bigPixels, cityProperties, radius, numOfDist, middle, citySize);
+    var distBorders = new DistricBorders(bigPixels, cityProperties, radius, numOfDist, middle, citySize);
     disBuilder.buildDist(bigPixels);
     disBuilder.colorDistricts();
-    show();
-    disBuilder.showNeighbors();
+    var cityRoad = new CityRoads(bigPixels, disBuilder,cityProperties);
+    var view = new View();
+    view.show(bigPixels);
+    disBuilder.showTypes();
     const endTime = Date.now();
     console.log("Czas trwania:" + (endTime - startTime) / 1000);
 }

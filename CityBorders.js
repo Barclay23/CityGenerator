@@ -1,4 +1,4 @@
-class Cityborders {
+class CityBorders {
     isInTable(x, y) {
         if ((x) > -1 && (x) < this.b && (y) > -1 && (y) < this.a) {
             return true;
