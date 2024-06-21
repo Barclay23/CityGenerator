@@ -26,7 +26,8 @@ class View {
             [218, 0, 0],
             [127, 0, 0],
             [119, 86, 101],
-            [127, 106, 0],];
+            [127, 106, 0],
+            [63, 24, 0]];
     }
     randomize(color) {
         var color2 = [0, 0, 0];
@@ -51,15 +52,20 @@ class View {
         return color2;
     }
     colormapToRgb(a) {
-        return this.randomize(this.map[a]);
+        if( this.map[a]!=null){
+            return this.randomize(this.map[a]);
+        }
+        else{
+            return this.randomize(this.map[18]);
+        }
     }
-    async show(bigPixels) {
+    async show(bigPixels, names) {
         const canvas = document.getElementById("result");
+        const ctx = canvas.getContext('2d');
         const y = bigPixels.length * maskSize;
         const x = bigPixels[0].length * maskSize;
         var imageData = canvas.getContext('2d').getImageData(0, 0, x, y);
         for (let i = 0; i < bigPixels.length; i++) {
-            //const row = document.createElement('tr');
             for (let j = 0; j < bigPixels[i].length; j++) {
                 let color = this.colormapToRgb(bigPixels[i][j]);
                 if (typeof color !== 'undefined') {
@@ -76,5 +82,23 @@ class View {
             }
         }
         canvas.getContext('2d').putImageData(imageData, 0, 0);
+        ctx.fillStyle = 'black';
+        ctx.font = '18px Bell MT';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        for (let i = 0; i < names.length; i++) {
+            let district = names[i].district;
+            let posX = district.x * maskSize + maskSize / 2;
+            let posY = district.y * maskSize + maskSize / 2;
+            let text = names[i].name;
+            let lines = text.split(' ');
+            if (lines.length === 2) {
+                ctx.fillText(lines[0], posX, posY - 10);
+                ctx.fillText(lines[1], posX, posY + 10);
+            } else {
+                ctx.fillText(text, posX, posY);
+            }
+        }
     }
 }

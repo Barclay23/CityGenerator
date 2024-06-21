@@ -7,14 +7,14 @@ class CityRoads {
         }
         return false;
     }
-    ifBorder(x, y) {
+    ifBorder(x, y, dist) {
         var white = 0;
         var ifMore = 0;
         var tabX = [x, x + 1, x, x - 1];
         var tabY = [y + 1, y, y - 1, y];
         for (let i = 0; i < 4; i++) {
             if (this.isInTable(tabX[i], tabY[i])) {
-                if (this.bigPixels[tabY[i]][tabX[i]] > 6 && this.bigPixels[tabY[i]][tabX[i]] != this.bigPixels[y][x]) {
+                if (this.bigPixels[tabY[i]][tabX[i]] > 6 && !dist.ifInDistrict(tabX[i],tabY[i])) {
                     ifMore = 1;
                 }
             }
@@ -34,8 +34,9 @@ class CityRoads {
         for (let i = 0; i < distBuld.numOfDist(); i++) {
             for (let j = 0; j < distBuld.getDist(i).getSize(); j++) {
                 var point = distBuld.getDist(i).getPoint(j);
-                this.ifBorder(point.x,point.y);
+                this.ifBorder(point.x,point.y,distBuld.getDist(i));
             }
         }
+
     }
 }

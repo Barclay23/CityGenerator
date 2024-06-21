@@ -1,7 +1,12 @@
 class District {
     constructor(a,b,type, cityProperties, number){
+
         this.a=a;
         this.b=b;
+        this.x=0;
+        this.y=0;
+        this.xSum=0;
+        this.ySum=0;
         this.type = type;
         this.cP = cityProperties;
         this.number = number;
@@ -14,6 +19,8 @@ class District {
         this.size = 0;
     }
     async addPoint(x,y){
+        this.xSum+=x;
+        this.ySum+=y;
         if(!this.points.includes({x,y})){
             this.points.push({ x: x, y: y });
             this.PMap.set(x*this.a+y,1);
@@ -52,5 +59,18 @@ class District {
     }
     getPoint(num){
         return this.points[num];
+    }
+    setCenter(){
+        this.x = this.xSum/this.size;
+        this.y = this.ySum/this.size;
+    }
+    getX(){
+        return this.x;
+    }
+    getY(){
+        return this.y;
+    }
+    ifInDistrict(x, y) {
+        return this.PMap.has(x * this.a + y);
     }
 }

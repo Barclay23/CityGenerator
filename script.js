@@ -50,13 +50,13 @@ function selectTypeOption() {
 }
 function updateSizes(){
     switch (selectedTypeOption) {
-        case "option1":
+        case "trade":
             cityType = 0;
             break;
-        case "option2":
+        case "fortress":
             cityType = 1;
             break;
-        case "option3":
+        case "port":
             cityType = 2;
             break;
         default:
@@ -64,16 +64,10 @@ function updateSizes(){
             break;
     }
     switch (selectedMaskOption) {
-        case "option1":
-            maskSize = 1;
-            break;
-        case "option2":
-            maskSize = 2;
-            break;
-        case "option3":
+        case "5px":
             maskSize = 5;
             break;
-        case "option4":
+        case "10px":
             maskSize = 10;
             break;
         default:
@@ -81,13 +75,13 @@ function updateSizes(){
             break;
     }
     switch (selectedSizeOption) {
-        case "option1":
+        case "small":
             citySize = 0;
             break;
-        case "option2":
+        case "medium":
             citySize = 1;
             break;
-        case "option3":
+        case "large":
             citySize = 2;
             break;
         default:
@@ -128,8 +122,11 @@ async function test() {
     disBuilder.colorDistricts();
     var cityRoad = new CityRoads(bigPixels, disBuilder,cityProperties);
     var view = new View();
-    view.show(bigPixels);
-    disBuilder.showTypes();
+    var names = new RandomNames(disBuilder);
+    if(cityType == 1){
+        var wall = new CityWalls(bigPixels);
+    }
+    view.show(bigPixels,names.getNames());
     const endTime = Date.now();
     console.log("Czas trwania:" + (endTime - startTime) / 1000);
 }

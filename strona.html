@@ -14,6 +14,8 @@
     <script src="District.js"></script>
     <script src="CityRoads.js"></script>
     <script src="View.js"></script>
+    <script src="RandomNames.js"></script>
+    <script src="CityWalls.js"></script>
 </head>
 
 <body>
@@ -22,26 +24,25 @@
         Zmiastuj
     </button>
     Wybierz rozmiar
-    <select id="sizeOptions" onselect="selectSizeOption()">
-        <option value="option1">Małe</option>
-        <option value="option2">Średnie</option>
-        <option value="option3">Duże</option>
+    <select id="sizeOptions" onchange="selectSizeOption()">
+        <option value="small">Małe</option>
+        <option value="medium">Średnie</option>
+        <option value="large">Duże</option>
     </select>
     Wybierz typ
-    <select id="typeOptions" onselect="selectTypeOption()">
-        <option value="option1">Handlowe</option>
-        <option value="option2">Warowne</option>
-        <option value="option3">Portowe</option>
+    <select id="typeOptions" onchange="selectTypeOption()">
+        <option value="trade">Handlowe</option>
+        <option value="fortress">Warowne</option>
+        <option value="port">Portowe</option>
     </select>
     Wybierz maskę
-    <select id="maskOptions" onselect="selectMaskOption()">
-        <option value="option1">1 px</option>
-        <option value="option2">2 px</option>
-        <option value="option3">5 px</option>
-        <option value="option4">10 px</option>
+    <select id="maskOptions" onchange="selectMaskOption()">
+        <option value="5px">5 px</option>
+        <option value="10px">10 px</option>
     </select>
     <br>
-    <canvas id="result" width="1500" height="1000"></canvas>
+    <canvas id="result" width="1500" height="800"></canvas>
+    <div id="dynamicTextContainer" style="margin-top: 20px; font-size: 16px;"></div>
 </body>
 
 </html>

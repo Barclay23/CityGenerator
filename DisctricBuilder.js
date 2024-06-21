@@ -29,17 +29,44 @@ class DistricBuilder {
         for (let i = 0; i < 3; i++) {
             while (howMany != i + 1) {
                 which = Math.round(Math.random() * (this.numOfD-1));
-                if (!used.includes(which) && (this.type != 2 || this.districts[which].ifNearWater())) {
-                    used[howMany] = which;
-                    if (i < 2) {
-                        this.districts[which].setType(i);
-                        this.listOfTypes.push(i);
+                if (!used.includes(which)) {
+                    if (i < 1) {
+                        if(this.mandatoryDis[this.type] == 3){
+                            if(this.districts[which].ifNearWater()){
+                                this.districts[which].setType(this.mandatoryDis[this.type]);
+                                this.listOfTypes.push(this.mandatoryDis[this.type]);
+                                used[howMany] = which;
+                                howMany++;
+                            }
+                        }
+                        else if(this.mandatoryDis[this.type] == 4){
+                            var cuSize=0;
+                            var cuDis = which;
+                            for(let j=0; j<this.numOfD;j++){
+                                if(this.districts[j].getSize() > cuSize && !used.includes(this.districts[j])){
+                                    cuDis = j;
+                                    cuSize = this.districts[j].getSize();
+                                }
+                            }
+                            this.districts[cuDis].setType(this.mandatoryDis[this.type]);
+                            used[howMany] = cuDis;
+                            this.listOfTypes.push(this.mandatoryDis[this.type]);
+                            howMany++;
+                        }
+                        else{
+                            this.districts[which].setType(this.mandatoryDis[this.type]);
+                            this.listOfTypes.push(this.mandatoryDis[this.type]);
+                            used[howMany] = which;
+                            howMany++;
+                        }
+                        
                     }
                     else {
-                        this.districts[which].setType(this.mandatoryDis[this.type]);
-                        this.listOfTypes.push(this.mandatoryDis[this.type]);
+                        this.districts[which].setType(i-1);
+                        this.listOfTypes.push(i-1);
+                        used[howMany] = which;
+                        howMany++;
                     }
-                    howMany++;
                 }
             }
         }
@@ -56,12 +83,26 @@ class DistricBuilder {
             if(this.ifPossible[whichType] == 0){
                 which = Math.round(Math.random() * (this.numOfD-1));
                 if (!used.includes(which) && (whichType != 3 || this.districts[which].ifNearWater())) {
-                    used[howMany] = which;
-                    this.districts[which].setType(whichType);
-                    this.listOfTypes.push(whichType);
+                    if(whichType == 4){
+                        var cuSize=0;
+                            var cuDis = which;
+                            for(let j=0; j<this.numOfD;j++){
+                                if(this.districts[j].getSize() > cuSize && !used.includes(this.districts[j])){
+                                    cuDis = j;
+                                    cuSize = this.districts[j].getSize();
+                                }
+                            }
+                            this.districts[cuDis].setType(whichType);
+                            used[howMany] = cuDis;
+                    }
+                    else{
+                        used[howMany] = which;
+                        this.districts[which].setType(whichType);
+                    }
                     if(whichType == 2 || whichType == 3 || whichType == 4){
                         this.ifPossible[whichType] = 1;
                     }
+                    this.listOfTypes.push(whichType);
                     howMany++;
                 }
             }
@@ -91,6 +132,7 @@ class DistricBuilder {
                 this.mandatoryDis[2] = 2;
             }
         }
+        this.ifPossible[this.mandatoryDis[type]] = 1;
     }
     numOfDist() {
         return this.numOfD;
@@ -106,7 +148,7 @@ class DistricBuilder {
             for (let j = 0; j < bigPixels[0].length; j++) {
                 if (bigPixels[i][j] > 6) {
                     if (distTab[bigPixels[i][j] - 7] == 0) {
-                        var district = new District(bigPixels[0].length, bigPixels.length, -1, this.cP, bigPixels[i][j] - 7);
+                        var district = new District(bigPixels[0].length, bigPixels.length, 0, this.cP, bigPixels[i][j] - 7);
                         this.districts[bigPixels[i][j] - 7] = district;
                         distTab[bigPixels[i][j] - 7] = 1;
                     }
@@ -126,6 +168,7 @@ class DistricBuilder {
                 }
             }
             this.districts[i].setTerrian(what);
+            this.districts[i].setCenter();
         }
         this.choosingTypes();
     }

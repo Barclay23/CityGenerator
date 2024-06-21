@@ -1,11 +1,7 @@
-for (let i = 0; i < this.roads.length; i++) {
-    for (let j = 0; j < this.roads[0].length; j++) {
-        if(this.bPtmp[i][j] == 6){
-            this.bigPixels[i][j] = 6;
+for (let i = 0; i < bigPixels.length; i++) {
+    for (let j = 0; j < bigPixels[0].length; j++) {
+        if (bigPixels[i][j] > 6) {
+            this.ifBorder(j, i);
         }
     }
-}
-for (let i = 0; i < this.tabRand.length; i++) {
-    var point = this.cP.getP(this.tabRand[i]);
-    this.bigPixels[point.y][point.x] = 5;
 }
