@@ -189,6 +189,11 @@ class DistricBuilder {
             }
         }
     }
+    async showSizes(){
+        for (let i=0; i<this.numOfD; i++){
+            console.log(i+" "+this.districts[i].getSize());
+        }
+    }
     getDist(num){
         return this.districts[num];
     }
