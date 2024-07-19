@@ -26,7 +26,7 @@ class RandomNames{
             "Ivycrest",
             "Elderberry Estate",
             "Hawthorn Heights",
-            "Yew Yard",
+            "Jew Yard",
             "Chestnut Court",
             "Dogwood Drive",
             "Larch Lane",

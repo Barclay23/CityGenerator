@@ -1,6 +1,6 @@
-0 Mieszkalna (zawsze)
-1 Magazyny (zawsze)
-2 Rynek/stare miasto (zawsze w handlowym)
-3 Port (zwasze w portowym)
-4 Zamek (zawsze w warownym)
-5 Slumsy (portowe i handlowe)
+0 Mieszkalna (zawsze) - kościół, studnia, karczma, szkoła
+1 Magazyny (zawsze) - spichlerz, warsztat, stajnia
+2 Rynek/stare miasto (zawsze w handlowym) - rynek, ratusz, gospoda, kościół
+3 Port (zwasze w portowym) - tawerna, żuraw
+4 Zamek (zawsze w warownym) - kapliczka, stajnia, zbrojownia
+5 Slumsy (portowe i handlowe) - studnia, spelunek

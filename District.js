@@ -17,6 +17,8 @@ class District {
         this.nMAP = new Map();
         this.neighbours = [];
         this.size = 0;
+        this.buildings = [];
+        this.buildingPoints = [];
     }
     async addPoint(x,y){
         this.xSum+=x;
@@ -72,5 +74,24 @@ class District {
     }
     ifInDistrict(x, y) {
         return this.PMap.has(x * this.a + y);
+    }
+    async addBuilding(type, x, y){
+        if(!this.buildings.includes(type) && !this.buildingPoints.includes({x,y})){
+            this.buildings.push(type);
+            this.buildingPoints.push({ x: x, y: y });
+        }
+    }
+    getBuildingType(index){
+        if(index<this.buildings.length){
+            return this.buildings[index];
+        }
+    }
+    getBuildingPoint(index){
+        if(index<this.buildings.length){
+            return this.buildingPoints[index];
+        }
+    }
+    getBuildingsNumber(){
+        return this.buildings.length;
     }
 }

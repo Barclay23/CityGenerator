@@ -29,6 +29,24 @@ class View {
             [127, 106, 0],
             [63, 24, 0],
             [181, 155, 161]];
+
+        this.buildingIcons = {
+            0: "icons/church.png",
+            1: "icons/well.png",
+            2: "icons/inn.png",
+            3: "icons/school.png",
+            4: "icons/garner.png",
+            5: "icons/workshop.png",
+            6: "icons/stables.png",
+            7: "icons/market.png",
+            8: "icons/town_hall.png",
+            9: "icons/relais.png",
+            10: "icons/tavern.png",
+            11: "icons/crane.png",
+            12: "icons/chapel.png",
+            13: "icons/arsenal.png",
+            14: "icons/gin_mill.png",
+        };
     }
     randomize(color) {
         var color2 = [0, 0, 0];
@@ -53,14 +71,14 @@ class View {
         return color2;
     }
     colormapToRgb(a) {
-        if( this.map[a]!=null){
+        if (this.map[a] != null) {
             return this.randomize(this.map[a]);
         }
-        else{
+        else {
             return this.randomize(this.map[18]);
         }
     }
-    async show(bigPixels, names) {
+    async show(bigPixels, names, disBuilder) {
         const canvas = document.getElementById("result");
         const ctx = canvas.getContext('2d');
         const y = bigPixels.length * maskSize;
@@ -83,6 +101,28 @@ class View {
             }
         }
         canvas.getContext('2d').putImageData(imageData, 0, 0);
+
+        const loadImage = (src) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = (err) => reject(err);
+            });
+        };
+
+        for (let i = 0; i < disBuilder.numOfDist(); i++) {
+            let district = disBuilder.getDist(i);
+            for (let j = 0; j < district.getBuildingsNumber(); j++) {
+                let building = district.getBuildingType(j);
+                let img = await loadImage(this.buildingIcons[building]);
+                let point = district.getBuildingPoint(j);
+                let posX = point.x * maskSize-12;
+                let posY = point.y * maskSize-12;
+                ctx.drawImage(img, posX, posY);
+            }
+        }
+
         ctx.fillStyle = 'black';
         ctx.font = '18px Bell MT';
         ctx.textAlign = 'center';

@@ -121,14 +121,17 @@ async function test() {
     disBuilder.buildDist(bigPixels);
     var cityRoad = new CityRoads(bigPixels, disBuilder,cityProperties);
     disBuilder.colorDistricts();
+    //disBuilder.showSizes();
+    await disBuilder.addBuildings();
     if(cityType == 1){
         var wall = new CityWalls(bigPixels);
     }
-    disBuilder.showSizes();
-    console.log("cos");
+    var out = new OutsideRoads(bigPixels);
+    out.countPoints();
+    var bridge = new Bridges(disBuilder, bigPixels);
     var view = new View();
     var names = new RandomNames(disBuilder);
-    view.show(bigPixels,names.getNames());
+    view.show(bigPixels,names.getNames(), disBuilder);
     const endTime = Date.now();
     console.log("Czas trwania:" + (endTime - startTime) / 1000);
 }
